@@ -1,3 +1,4 @@
+import os
 import discord
 from discord.ext import commands
 from discord.ui import Select, View, Modal, TextInput
@@ -61,4 +62,5 @@ async def on_ready():
     print(f"Connecté en tant que {bot.user}")
 
 bot.run(TOKEN)
+
 
