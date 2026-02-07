@@ -2,13 +2,15 @@ import discord
 from discord.ext import commands
 from discord.ui import Select, View, Modal, TextInput
 
-TOKEN = os.getenv("TOKEN")
-GUILD_ID = 1469055922935562333
+# ----- TON TOKEN DIRECTEMENT ICI -----
+TOKEN = "TON_TOKEN_ICI"
+GUILD_ID = 1469055922935562333  # Ton serveur
 
+# ----- Intents -----
 intents = discord.Intents.default()
 intents.messages = True
 intents.guilds = True
-intents.message_content = True  # ← très important pour lire les messages textuels
+intents.message_content = True  # Très important pour lire les messages textuels
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
@@ -57,6 +59,5 @@ async def menu(ctx):
 @bot.event
 async def on_ready():
     print(f"Connecté en tant que {bot.user}")
-
 
 bot.run(TOKEN)
