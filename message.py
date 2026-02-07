@@ -8,38 +8,39 @@ from discord.ui import View, Select, Modal, TextInput
 # =====================
 TOKEN = os.getenv("DISCORD_TOKEN")
 if not TOKEN:
-    raise RuntimeError("DISCORD_TOKEN manquant")
+    raise RuntimeError("DISCORD_TOKEN manquant dans Railway")
 
 intents = discord.Intents.default()
 intents.guilds = True
 intents.messages = True
-intents.message_content = True
+intents.message_content = True  # nécessaire pour lire les messages textuels
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # =====================
-# MODAL
+# MODAL (écriture du message)
 # =====================
 class MessageModal(Modal):
     def __init__(self, channel: discord.TextChannel):
         super().__init__(title=f"Envoyer un message dans #{channel.name}")
         self.channel = channel
 
-        self.message = TextInput(
+        self.message_input = TextInput(
             label="Message",
             placeholder="Écris ton message ici…",
             style=discord.InputTextStyle.paragraph,
             required=True,
             max_length=2000
         )
-        self.add_item(self.message)
+        self.add_item(self.message_input)
 
     async def on_submit(self, interaction: discord.Interaction):
-        # 🔥 OBLIGATOIRE
+        # 🔥 OBLIGATOIRE : defer pour éviter le timeout
         await interaction.response.defer(ephemeral=True)
 
         try:
-            await self.channel.send(self.message.value)
+            # Envoi du message dans le salon choisi
+            await self.channel.send(self.message_input.value)
             await interaction.followup.send(
                 "✅ Message envoyé",
                 ephemeral=True
@@ -116,4 +117,7 @@ async def menu(ctx: commands.Context):
 async def on_ready():
     print(f"✅ Connecté en tant que {bot.user}")
 
+# =====================
+# RUN
+# =====================
 bot.run(TOKEN)
