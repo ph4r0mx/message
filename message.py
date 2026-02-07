@@ -27,6 +27,7 @@ class MessageModal(Modal):
 
         self.message = TextInput(
             label="Message",
+            placeholder="Écris ton message ici…",
             style=discord.InputTextStyle.paragraph,
             required=True,
             max_length=2000
@@ -34,16 +35,19 @@ class MessageModal(Modal):
         self.add_item(self.message)
 
     async def on_submit(self, interaction: discord.Interaction):
+        # 🔥 OBLIGATOIRE
+        await interaction.response.defer(ephemeral=True)
+
         try:
             await self.channel.send(self.message.value)
-            await interaction.response.send_message(
+            await interaction.followup.send(
                 "✅ Message envoyé",
                 ephemeral=True
             )
         except Exception as e:
-            print("ERREUR :", e)
-            await interaction.response.send_message(
-                "❌ Impossible d’envoyer le message (permissions)",
+            print("ERREUR ENVOI MESSAGE :", e)
+            await interaction.followup.send(
+                "❌ Impossible d’envoyer le message (permissions ?)",
                 ephemeral=True
             )
 
@@ -56,7 +60,7 @@ class ChannelSelect(Select):
 
         for channel in guild.text_channels:
             perms = channel.permissions_for(guild.me)
-            if perms.send_messages and perms.view_channel:
+            if perms.view_channel and perms.send_messages:
                 options.append(
                     discord.SelectOption(
                         label=channel.name,
