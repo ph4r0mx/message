@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord.ui import Select, View, Modal, TextInput
 
 # ----- TON TOKEN DIRECTEMENT ICI -----
-TOKEN = "TON_TOKEN_ICI"
+TOKEN = os.getenv("DISCORD_TOKEN")
 GUILD_ID = 1469055922935562333  # Ton serveur
 
 # ----- Intents -----
@@ -61,3 +61,4 @@ async def on_ready():
     print(f"Connecté en tant que {bot.user}")
 
 bot.run(TOKEN)
+
