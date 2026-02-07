@@ -23,7 +23,7 @@ class MessageModal(Modal):
         self.message_input = TextInput(
             label="Ton message",
             placeholder="Écris ici ton message...",
-            style=discord.TextStyle.paragraph,
+            style=discord.InputTextStyle.paragraph,
             required=True
         )
         self.add_item(self.message_input)
@@ -62,5 +62,6 @@ async def on_ready():
     print(f"Connecté en tant que {bot.user}")
 
 bot.run(TOKEN)
+
 
 
