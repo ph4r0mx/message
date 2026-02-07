@@ -58,5 +58,6 @@ async def envoyer(ctx):
     await ctx.send("Choisis le salon où tu veux envoyer ton message :", view=view)
 
 # Token depuis Railway
-token = os.environ.get("RAILWAY_DISCORD_TOKEN")
+token = os.environ.get("DISCORD_TOKEN")
 bot.run(token)
+
