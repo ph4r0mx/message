@@ -52,5 +52,6 @@ async def envoyer(ctx):
         await ctx.send("Envoie-moi un DM pour utiliser cette commande !")
 
 # Récupère le token depuis la variable d'environnement RAILWAY_DISCORD_TOKEN
-token = os.environ.get("RAILWAY_DISCORD_TOKEN")
+token = os.environ.get("DISCORD_TOKEN")
 bot.run(token)
+
