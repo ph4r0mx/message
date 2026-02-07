@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord.ui import Select, View, Modal, TextInput
 
-TOKEN = "MTQ2OTY4MjAwMTY3MzE5MTUwNQ.GiKRyn.5J-Y2c9_LpeJEd4bWFdRpL1oSjth7lRF-_cCtw"  # Remplace par ton token
+TOKEN = os.getenv("TOKEN")
 GUILD_ID = 1469055922935562333
 
 intents = discord.Intents.default()
@@ -57,5 +57,6 @@ async def menu(ctx):
 @bot.event
 async def on_ready():
     print(f"Connecté en tant que {bot.user}")
+
 
 bot.run(TOKEN)
